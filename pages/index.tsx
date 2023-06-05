@@ -1,54 +1,140 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import {
+  ConnectWallet,
+  MediaRenderer,
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+  useOwnedNFTs,
+} from "@thirdweb-dev/react";
+import { BigNumber, ethers } from "ethers";
+
+import { ClaimRolling } from "../components/ClaimRolling";
+import { Inventory } from "../components/Inventory";
+import { Equipped } from "../components/Equipped";
+
+import {
+  ROLLING_ADDRESS,
+  LEGENDS_ADDRESS,
+  STAKING_ADDRESS,
+  REWARDS_ADDRESS,
+} from "../constant/addresses";
 import type { NextPage } from "next";
-import styles from "../styles/Home.module.css";
+import {
+  Text,
+  Box,
+  Card,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Spinner,
+  Skeleton,
+  Stack,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="http://thirdweb.com/">thirdweb</a>!
-        </h1>
+  const address = useAddress();
 
-        <p className={styles.description}>
-          Get started by configuring your desired network in{" "}
-          <code className={styles.code}>pages/_app.tsx</code>, then modify the{" "}
-          <code className={styles.code}>pages/index.tsx</code> file!
-        </p>
+  const { contract: rollingContract } = useContract(ROLLING_ADDRESS);
+  const { contract: legendsContract } = useContract(LEGENDS_ADDRESS);
+  const { contract: stakingContract } = useContract(STAKING_ADDRESS);
+  const { contract: rewardContract } = useContract(REWARDS_ADDRESS);
 
-        <div className={styles.connect}>
+  const { data: ownedRollings, isLoading: loadingOwnedRollings } = useOwnedNFTs(
+    rollingContract,
+    address
+  );
+
+  const { data: ownedLegends, isLoading: loadingOwnedLegends } = useOwnedNFTs(
+    legendsContract,
+    address
+  );
+
+  const { data: equippedLegends } = useContractRead(
+    stakingContract,
+    "getStakeInfo",
+    [address]
+  );
+  const { data: rewardBalance } = useContractRead(rewardContract, "balanceOf", [
+    address,
+  ]);
+
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+
+  if (!address) {
+    return (
+      <Container maxW={"1200px"}>
+        <Flex
+          direction={"column"}
+          h={"100vh"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Heading my={"40px"}>Welcome to Ethereal Quest</Heading>
           <ConnectWallet />
-        </div>
+        </Flex>
+      </Container>
+    );
+  }
 
-        <div className={styles.grid}>
-          <a href="https://portal.thirdweb.com/" className={styles.card}>
-            <h2>Portal &rarr;</h2>
-            <p>
-              Guides, references and resources that will help you build with
-              thirdweb.
-            </p>
-          </a>
+  if (loadingOwnedRollings) {
+    return (
+      <Container maxW={"1200px"}>
+        <Flex h={"100vh"} justifyContent={"center"} alignItems={"center"}>
+          <Spinner />
+        </Flex>
+      </Container>
+    );
+  }
 
-          <a href="https://thirdweb.com/dashboard" className={styles.card}>
-            <h2>Dashboard &rarr;</h2>
-            <p>
-              Deploy, configure and manage your smart contracts from the
-              dashboard.
-            </p>
-          </a>
+  if (ownedRollings?.length === 0) {
+    return (
+      <Container maxW={"1200px"}>
+        <ClaimRolling />
+      </Container>
+    );
+  }
 
-          <a
-            href="https://portal.thirdweb.com/templates"
-            className={styles.card}
-          >
-            <h2>Templates &rarr;</h2>
-            <p>
-              Discover and clone template projects showcasing thirdweb features.
-            </p>
-          </a>
-        </div>
-      </main>
-    </div>
+  return (
+    <Container maxW={"1200px"}>
+      <Card p={5}>
+        <Heading>Alpha Visionary</Heading>
+        <SimpleGrid columns={[1, 1, 2]} spacing={5}>
+          <Box>
+            {ownedRollings?.map((nft) => (
+              <div key={nft.metadata.id}>
+                <MediaRenderer src={nft.metadata.image} height="100%" width="100%" style={{ borderRadius: "10px" }}/>
+              </div>
+            ))}
+          </Box>
+          <Stack direction="row" spacing={5}>
+            <Text fontSize="small" fontWeight="bold">
+              $AL Balance:
+            </Text>
+            {rewardBalance && (
+              <Text>{ethers.utils.formatUnits(rewardBalance, 18)}</Text>
+            )}
+          </Stack>
+        </SimpleGrid>
+      </Card>
+      <Card p={5} my={10}>
+        <Heading>Art Cellar</Heading>
+        <Skeleton isLoaded={!loadingOwnedLegends}>
+          <Inventory nft={ownedLegends} />
+        </Skeleton>
+      </Card>
+      <Card p={5}>
+        <Heading mb={"30px"}>My Gallery</Heading>
+        <SimpleGrid columns={[1, 3]} spacing={10}>
+          {equippedLegends &&
+            equippedLegends[0].map((nft: BigNumber) => (
+              <Equipped key={nft.toNumber()} tokenId={nft.toNumber()} />
+            ))}
+        </SimpleGrid>
+      </Card>
+    </Container>
   );
 };
 
