@@ -82,7 +82,25 @@ export default function NavBar() {
               width={{ base: "100%", md: "auto" }}
               textAlign={{ base: "center", md: "left" }}
             >
-              Matic
+              New In Crypto
+            </Box>
+            <Box
+              as="a"  // Use "a" tag for external links
+              href="https://bitso.com/"  // Replace with your external link
+              target="_blank"  // Open link in a new tab
+              rel="noopener noreferrer"  // Security best practice
+              fontSize="sm"
+              display="block"
+              py={2}
+              px={4}
+              borderWidth={1}
+              borderRadius="md"
+              borderColor="gray.500"
+              _hover={{ bg: "gray.100" }}
+              width={{ base: "100%", md: "auto" }}
+              textAlign={{ base: "center", md: "left" }}
+            >
+              Exchange
             </Box>
           </Stack>
         </Box>
