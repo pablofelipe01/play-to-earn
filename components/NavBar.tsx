@@ -69,7 +69,7 @@ export default function NavBar() {
             
             <Box
               as="a"  // Use "a" tag for external links
-              href="https://bitso.com/"  // Replace with your external link
+              href="https://www.binance.com/en"  // Replace with your external link
               target="_blank"  // Open link in a new tab
               rel="noopener noreferrer"  // Security best practice
               fontSize="sm"
