@@ -97,7 +97,7 @@ const Home: NextPage = () => {
           display="flex"
           alignItems="center"
           flexDirection={{ base: "column", md: "row" }}
-          textAlign={{ base: "center", md: "left" }}
+          textAlign="center" // Align the content in the center on mobile
         >
           <Image
             src="https://i.imgur.com/Msg51g7.png" // Replace with the path to your image
@@ -109,10 +109,10 @@ const Home: NextPage = () => {
             mb={{ base: 4, md: 0 }}
           />
           <Flex direction="column" ml={{ base: 0, md: 4 }}>
-            <Heading my={"40px"}>
+            <Heading my={"40px"} textAlign={{ base: "center", md: "left" }}>
               Welcome to <br /> Ethereal Quest
             </Heading>
-            <Box alignSelf="flex-start">
+            <Box alignSelf="center" mt={4} textAlign="center"> {/* Center the ConnectWallet button on mobile */}
               <ConnectWallet />
             </Box>
           </Flex>
