@@ -73,8 +73,7 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-
-<Box
+        <Box
           as="a" // Use "a" tag for external links
           href="https://onramp.pokoapp.xyz/?apiKey=734c4a23-e256-46c4-b917-974f759a6aee&userId=poko_prod&cryptoList=MATIC-polygon" // Replace with your external link
           target="_blank" // Open link in a new tab
@@ -90,10 +89,16 @@ const Home: NextPage = () => {
           width={{ base: "50%", md: "auto" }}
           textAlign="center"
         >
-          New In Crypto <br/> Click here
+          New In Crypto <br /> Click here
         </Box>
         <br />
-        <Box mb={8} display="flex" alignItems="center" flexDirection={{ base: "column", md: "row" }} textAlign={{ base: "center", md: "left" }}>
+        <Box
+          mb={8}
+          display="flex"
+          alignItems="center"
+          flexDirection={{ base: "column", md: "row" }}
+          textAlign={{ base: "center", md: "left" }}
+        >
           <Image
             src="https://i.imgur.com/Msg51g7.png" // Replace with the path to your image
             alt="Image"
@@ -103,12 +108,14 @@ const Home: NextPage = () => {
             borderRadius="full"
             mb={{ base: 4, md: 0 }}
           />
-          <Heading my={"40px"} ml={{ base: 0, md: 4 }}>
-            Welcome to <br /> Ethereal Quest
-          </Heading>
-       
-        <ConnectWallet />
-        <br />
+          <Flex direction="column" ml={{ base: 0, md: 4 }}>
+            <Heading my={"40px"}>
+              Welcome to <br /> Ethereal Quest
+            </Heading>
+            <Box alignSelf="flex-start">
+              <ConnectWallet />
+            </Box>
+          </Flex>
         </Box>
       </Flex>
     </Container>
