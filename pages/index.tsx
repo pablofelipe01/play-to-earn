@@ -75,7 +75,7 @@ const Home: NextPage = () => {
       >
         <Box
           as="a" // Use "a" tag for external links
-          href="https://onramp.pokoapp.xyz/?apiKey=734c4a23-e256-46c4-b917-974f759a6aee&userId=poko_prod&cryptoList=MATIC-polygon" // Replace with your external link
+          href="https://youtu.be/h7EGenYpY_Q" // Replace with your external link
           target="_blank" // Open link in a new tab
           rel="noopener noreferrer" // Security best practice
           fontSize="sm"
