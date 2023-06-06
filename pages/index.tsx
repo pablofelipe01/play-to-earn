@@ -73,6 +73,26 @@ const Home: NextPage = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
+
+<Box
+          as="a" // Use "a" tag for external links
+          href="https://onramp.pokoapp.xyz/?apiKey=734c4a23-e256-46c4-b917-974f759a6aee&userId=poko_prod&cryptoList=MATIC-polygon" // Replace with your external link
+          target="_blank" // Open link in a new tab
+          rel="noopener noreferrer" // Security best practice
+          fontSize="sm"
+          display="block"
+          py={2}
+          px={4}
+          borderWidth={1}
+          borderRadius="md"
+          borderColor="gray.500"
+          _hover={{ bg: "gray.100" }}
+          width={{ base: "50%", md: "auto" }}
+          textAlign="center"
+        >
+          New In Crypto <br/> Click here
+        </Box>
+        <br />
         <Box mb={8} display="flex" alignItems="center" flexDirection={{ base: "column", md: "row" }} textAlign={{ base: "center", md: "left" }}>
           <Image
             src="https://i.imgur.com/Msg51g7.png" // Replace with the path to your image
@@ -86,26 +106,9 @@ const Home: NextPage = () => {
           <Heading my={"40px"} ml={{ base: 0, md: 4 }}>
             Welcome to <br /> Ethereal Quest
           </Heading>
-        </Box>
+       
         <ConnectWallet />
         <br />
-        <Box
-          as="a" // Use "a" tag for external links
-          href="https://onramp.pokoapp.xyz/?apiKey=734c4a23-e256-46c4-b917-974f759a6aee&userId=poko_prod&cryptoList=MATIC-polygon" // Replace with your external link
-          target="_blank" // Open link in a new tab
-          rel="noopener noreferrer" // Security best practice
-          fontSize="sm"
-          display="block"
-          py={2}
-          px={4}
-          borderWidth={1}
-          borderRadius="md"
-          borderColor="gray.500"
-          _hover={{ bg: "gray.100" }}
-          width={{ base: "80%", md: "auto" }}
-          textAlign="center"
-        >
-          New In Crypto? click here
         </Box>
       </Flex>
     </Container>
