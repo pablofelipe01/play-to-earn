@@ -49,12 +49,12 @@ export const Equipped: React.FC<EquippedProps> = (props) => {
               </Text>
               <Text>{nft.metadata.description}</Text>
               <Text>in Gallery {ethers.utils.formatUnits(claimableRewards[0], 0)}</Text>
-              {/* <Web3Button
+               <Web3Button
                 contractAddress={STAKING_ADDRESS}
                 action={(contract) => contract.call("withdraw", [props.tokenId, 1])}
               >
                 Back to Cellar
-              </Web3Button>  */}
+              </Web3Button>  
             </Box>
           </Flex>
           <Box mt={5}>
