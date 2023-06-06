@@ -32,6 +32,7 @@ import {
   Skeleton,
   Stack,
   useMediaQuery,
+  Image
 } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
@@ -66,16 +67,48 @@ const Home: NextPage = () => {
   if (!address) {
     return (
       <Container maxW={"1200px"}>
-        <Flex
-          direction={"column"}
-          h={"100vh"}
-          justifyContent={"center"}
-          alignItems={"center"}
+      <Flex
+        direction={"column"}
+        h={"100vh"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Box mb={8} display="flex" alignItems="center" flexDirection={{ base: "column", md: "row" }} textAlign={{ base: "center", md: "left" }}>
+          <Image
+            src="https://i.imgur.com/Msg51g7.png" // Replace with the path to your image
+            alt="Image"
+            width="300px"
+            height="300px"
+            objectFit="cover"
+            borderRadius="full"
+            mb={{ base: 4, md: 0 }}
+          />
+          <Heading my={"40px"} ml={{ base: 0, md: 4 }}>
+            Welcome to <br /> Ethereal Quest
+          </Heading>
+        </Box>
+        <ConnectWallet />
+        <br />
+        <Box
+          as="a" // Use "a" tag for external links
+          href="https://onramp.pokoapp.xyz/?apiKey=734c4a23-e256-46c4-b917-974f759a6aee&userId=poko_prod&cryptoList=MATIC-polygon" // Replace with your external link
+          target="_blank" // Open link in a new tab
+          rel="noopener noreferrer" // Security best practice
+          fontSize="sm"
+          display="block"
+          py={2}
+          px={4}
+          borderWidth={1}
+          borderRadius="md"
+          borderColor="gray.500"
+          _hover={{ bg: "gray.100" }}
+          width={{ base: "80%", md: "auto" }}
+          textAlign="center"
         >
-          <Heading my={"40px"}>Welcome to Ethereal Quest</Heading>
-          <ConnectWallet />
-        </Flex>
-      </Container>
+          New In Crypto? click here
+        </Box>
+      </Flex>
+    </Container>
     );
   }
 
