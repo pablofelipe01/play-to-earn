@@ -38,7 +38,7 @@ export function ClaimRolling() {
           Visit Agualinda
         </Link>
         <Link
-          href="https://www.youtube.com/watch?v=qSZuLdvhT1Q"
+          href="https://youtu.be/Ggq8g0l8tOU"
           target="_blank"
           rel="noopener noreferrer"
           mt={2}
