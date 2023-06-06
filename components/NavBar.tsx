@@ -48,7 +48,7 @@ export default function NavBar() {
             >
             Market Place
             </Box>
-            <Box
+            {/* <Box
               as="a"  // Use "a" tag for external links
               href="https://metamask.io/"  // Replace with your external link
               target="_blank"  // Open link in a new tab
@@ -65,9 +65,9 @@ export default function NavBar() {
               textAlign={{ base: "center", md: "left" }}
             >
               Wallet
-            </Box>
+            </Box> */}
             
-            <Box
+            {/* <Box
               as="a"  // Use "a" tag for external links
               href="https://www.binance.com/en"  // Replace with your external link
               target="_blank"  // Open link in a new tab
@@ -84,7 +84,7 @@ export default function NavBar() {
               textAlign={{ base: "center", md: "left" }}
             >
               Exchange
-            </Box>
+            </Box> */}
           </Stack>
         </Box>
         <Box display={{ base: "none", md: "block" }}>
